@@ -1,0 +1,7 @@
+flask
+playwright
+anthropic
+beautifulsoup4
+tinycss2
+Pillow
+python-dotenv

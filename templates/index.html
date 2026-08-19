@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PINE — Site Intelligence Engine</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="wrap">
+
+    <div class="brand">PINE<span class="dot"></span></div>
+    <div class="tagline">Site Intelligence Engine</div>
+
+    <h1 class="headline">Multi-layered website intelligence.</h1>
+    <p class="sub">Visual inspection, code inspection, cross-referencing, and research-backed consultant analysis — in one pass.</p>
+
+    <form id="analyse-form" autocomplete="off">
+      <label class="field-label" for="url">Website URL</label>
+      <input type="url" id="url" name="url" placeholder="https://example.com" required>
+
+      <label class="field-label" style="margin-top:28px;">Analysis mode</label>
+      <div class="chips" id="mode-chips">
+        <span class="chip active" data-mode="full">Full CRO Audit</span>
+        <span class="chip" data-mode="uiux">UI/UX Analysis</span>
+      </div>
+
+      <label class="field-label" for="context">Business context <span style="text-transform:none;letter-spacing:0;">(optional)</span></label>
+      <input type="text" id="context" name="context" placeholder="e.g. B2B fintech lending platform">
+      <div class="chips" id="context-chips">
+        <span class="chip" data-context="Fintech">Fintech</span>
+        <span class="chip" data-context="SaaS">SaaS</span>
+        <span class="chip" data-context="B2B">B2B</span>
+        <span class="chip" data-context="Services">Services</span>
+        <span class="chip" data-context="E-commerce">E-commerce</span>
+      </div>
+
+      <button type="submit" class="run" id="run-btn">Run Analysis</button>
+      <p class="note">Analysis takes 45–90 seconds.</p>
+      <p class="error-msg" id="error-msg" style="display:none;"></p>
+    </form>
+
+    <div class="pipeline" id="pipeline"></div>
+
+  </div>
+
+  <script>
+    // Human-readable labels for each pipeline stage the server emits (see STAGES in app.py).
+    var STAGE_LABELS = {
+      capture:  "Capture",
+      code:     "Code Audit",
+      visual:   "Visual Analysis",
+      crossref: "Cross-Reference",
+      report:   "Consultant Report"
+    };
+    // UI/UX mode skips the code-audit and cross-reference stages server-side.
+    var STAGES_FULL = ["capture", "code", "visual", "crossref", "report"];
+    var STAGES_UIUX = ["capture", "visual", "report"];
+
+    var selectedMode = "full";
+
+    var modeChips = document.getElementById("mode-chips");
+    modeChips.addEventListener("click", function (e) {
+      var chip = e.target.closest(".chip");
+      if (!chip) return;
+      modeChips.querySelectorAll(".chip").forEach(function (c) { c.classList.remove("active"); });
+      chip.classList.add("active");
+      selectedMode = chip.dataset.mode;
+    });
+
+    // Context chips are quick-fill helpers: clicking toggles a keyword into the free-text field.
+    var contextInput = document.getElementById("context");
+    document.getElementById("context-chips").addEventListener("click", function (e) {
+      var chip = e.target.closest(".chip");
+      if (!chip) return;
+      var kw = chip.dataset.context;
+      var parts = contextInput.value.split(/\s*,\s*/).map(function (s) { return s.trim(); }).filter(Boolean);
+      var idx = parts.indexOf(kw);
+      if (idx === -1) { parts.push(kw); chip.classList.add("active"); }
+      else { parts.splice(idx, 1); chip.classList.remove("active"); }
+      contextInput.value = parts.join(", ");
+    });
+
+    var form = document.getElementById("analyse-form");
+    var runBtn = document.getElementById("run-btn");
+    var errorMsg = document.getElementById("error-msg");
+    var pipeline = document.getElementById("pipeline");
+
+    function buildPipeline(mode) {
+      var stages = (mode === "uiux") ? STAGES_UIUX : STAGES_FULL;
+      pipeline.innerHTML = "";
+      stages.forEach(function (id) {
+        var el = document.createElement("div");
+        el.className = "stage";
+        el.id = "stage-" + id;
+        el.innerHTML =
+          '<div class="icon"></div>' +
+          '<div class="label">' + STAGE_LABELS[id] + '</div>' +
+          '<div class="msg">Waiting…</div>';
+        pipeline.appendChild(el);
+      });
+      pipeline.classList.add("visible");
+    }
+
+    function updateStage(stage, status, message) {
+      var el = document.getElementById("stage-" + stage);
+      if (!el) return;
+      el.classList.remove("running", "done", "error");
+      if (status) el.classList.add(status);
+      if (message) el.querySelector(".msg").textContent = message;
+    }
+
+    function showError(msg) {
+      errorMsg.textContent = msg;
+      errorMsg.style.display = "block";
+      runBtn.disabled = false;
+      runBtn.textContent = "Run Analysis";
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      errorMsg.style.display = "none";
+
+      var url = document.getElementById("url").value.trim();
+      if (!url) { showError("A URL is required."); return; }
+
+      runBtn.disabled = true;
+      runBtn.textContent = "Analysing…";
+      buildPipeline(selectedMode);
+
+      fetch("/analyse", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: url, context: contextInput.value.trim(), mode: selectedMode })
+      })
+        .then(function (res) { return res.json().then(function (d) { return { ok: res.ok, data: d }; }); })
+        .then(function (r) {
+          if (!r.ok || r.data.error) { showError(r.data.error || "Something went wrong. Please try again."); return; }
+          openStream(r.data.job_id);
+        })
+        .catch(function () { showError("Could not reach the server. Please try again."); });
+    });
+
+    function openStream(jobId) {
+      var source = new EventSource("/stream/" + jobId);
+      source.onmessage = function (evt) {
+        var data;
+        try { data = JSON.parse(evt.data); } catch (err) { return; }
+
+        if (data.stage === "complete") {
+          source.close();
+          window.location.href = data.report_url;
+          return;
+        }
+        if (data.stage === "error") {
+          source.close();
+          showError(data.message || "The analysis could not be completed.");
+          return;
+        }
+        updateStage(data.stage, data.status, data.message);
+      };
+      source.onerror = function () {
+        // The stream closes normally once the job ends; only surface an error if we never finished.
+        source.close();
+        if (runBtn.disabled) {
+          showError("The connection to the analysis stream was lost. Please try again.");
+        }
+      };
+    }
+  </script>
+</body>
+</html>

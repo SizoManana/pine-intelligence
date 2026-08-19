@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    {% if error %}Analysis unavailable
+    {% elif pending %}Analysis in progress
+    {% else %}Intelligence Report — {{ url }}{% endif %}
+  </title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    /* ---- Report-specific styles (PINE design language) ---- */
+    .report-wrap { max-width: 900px; margin: 0 auto; padding: 48px 24px 120px; }
+
+    .report-head {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 24px; flex-wrap: wrap; margin-bottom: 40px;
+    }
+    .report-head .site-url {
+      color: var(--muted); font-size: 14px; margin-top: 10px; word-break: break-all;
+    }
+    .report-head .site-title { font-size: 15px; margin-top: 4px; color: var(--white); }
+
+    .verdict {
+      display: inline-block; padding: 8px 18px; border-radius: 999px;
+      font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px;
+      border: 1px solid var(--border);
+    }
+    .verdict.strong    { color: var(--green); border-color: var(--green); background: rgba(0,200,81,.10); }
+    .verdict.solid     { color: var(--blue);  border-color: var(--blue);  background: rgba(0,191,255,.10); }
+    .verdict.needs-work{ color: var(--amber); border-color: var(--amber); background: rgba(255,184,0,.10); }
+    .verdict.critical  { color: var(--red);   border-color: var(--red);   background: rgba(255,34,0,.12); }
+
+    .section-title {
+      text-transform: uppercase; letter-spacing: 2px; font-size: 13px;
+      color: var(--muted); margin: 56px 0 18px; font-weight: 700;
+      border-bottom: 1px solid var(--border); padding-bottom: 10px;
+    }
+
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 22px 24px; margin-bottom: 16px;
+    }
+
+    .banner {
+      border-radius: 10px; padding: 16px 20px; margin-bottom: 24px; font-size: 14px;
+      border: 1px solid var(--amber); background: rgba(255,184,0,.08); color: var(--amber);
+    }
+
+    /* Scores */
+    .scores { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 8px; }
+    .score-card { flex: 1 1 240px; text-align: center; }
+    .score-card .num { font-size: 64px; font-weight: 800; line-height: 1; }
+    .score-card .den { font-size: 22px; color: var(--muted); font-weight: 700; }
+    .score-card .lbl {
+      text-transform: uppercase; letter-spacing: 2px; font-size: 12px;
+      color: var(--muted); margin-top: 10px;
+    }
+    .grade-good { color: var(--green); }
+    .grade-mid  { color: var(--amber); }
+    .grade-poor { color: var(--red); }
+
+    /* Breakdown bars */
+    .bd-cols { display: flex; gap: 20px; flex-wrap: wrap; }
+    .bd-col { flex: 1 1 380px; }
+    .bd-col h4 {
+      font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--muted); margin: 0 0 14px;
+    }
+    .bd-row { margin-bottom: 14px; }
+    .bd-row .top {
+      display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px;
+    }
+    .bd-row .top .v { color: var(--muted); }
+    .bar { height: 8px; background: #1a1a1a; border-radius: 999px; overflow: hidden; }
+    .bar > span { display: block; height: 100%; border-radius: 999px; background: var(--red); }
+
+    /* Recommendations */
+    .rec { position: relative; }
+    .rec .rec-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+    .rec .rank {
+      font-size: 13px; font-weight: 800; color: var(--muted);
+      border: 1px solid var(--border); border-radius: 6px; padding: 2px 9px; flex: 0 0 auto;
+    }
+    .rec h3 { font-size: 19px; margin: 0; font-weight: 800; }
+    .sev {
+      display: inline-block; font-size: 11px; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 1px; padding: 3px 10px; border-radius: 999px; flex: 0 0 auto;
+    }
+    .sev.critical { color: var(--red);   background: rgba(255,34,0,.14); }
+    .sev.high     { color: var(--amber); background: rgba(255,184,0,.14); }
+    .sev.medium   { color: var(--blue);  background: rgba(0,191,255,.14); }
+    .sev.low      { color: var(--muted); background: rgba(255,255,255,.06); }
+    .rec .field { margin-top: 12px; }
+    .rec .field .k {
+      text-transform: uppercase; letter-spacing: 1.5px; font-size: 11px;
+      color: var(--muted); display: block; margin-bottom: 3px;
+    }
+    .rec .field .val { font-size: 15px; }
+
+    /* Cross-reference */
+    .xref .xref-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; }
+    .xtype {
+      font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 800;
+      padding: 3px 10px; border-radius: 999px; flex: 0 0 auto;
+      color: var(--muted); background: rgba(255,255,255,.06);
+    }
+    .xtype.gap { color: var(--amber); background: rgba(255,184,0,.12); }
+    .xtype.contradiction { color: var(--red); background: rgba(255,34,0,.12); }
+    .xtype.hidden { color: var(--blue); background: rgba(0,191,255,.12); }
+    .xtype.confirmation { color: var(--green); background: rgba(0,200,81,.12); }
+    .xref .pair { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 10px; }
+    .xref .pair > div { flex: 1 1 260px; }
+    .xref .pair .k {
+      text-transform: uppercase; letter-spacing: 1.5px; font-size: 11px;
+      color: var(--muted); display: block; margin-bottom: 3px;
+    }
+
+    /* Section-by-section read */
+    .sec-item { margin-bottom: 18px; }
+    .sec-item .idx { font-weight: 800; color: var(--red); margin-right: 8px; }
+    .sec-item .meta { color: var(--muted); font-size: 13px; margin-top: 6px; }
+    .sec-item .overlap { color: var(--amber); }
+
+    /* Screenshots */
+    .shots { display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start; }
+    .shot { flex: 1 1 300px; }
+    .shot .cap {
+      text-transform: uppercase; letter-spacing: 1.5px; font-size: 12px;
+      color: var(--muted); margin-bottom: 10px;
+    }
+    .shot img {
+      width: 100%; border: 1px solid var(--border); border-radius: 8px; display: block;
+    }
+    .shot.mobile { flex: 0 0 240px; max-width: 240px; }
+    .sections-strip img {
+      width: 100%; border: 1px solid var(--border); border-radius: 8px;
+      display: block; margin-bottom: 12px;
+    }
+
+    /* References */
+    .refs { list-style: none; padding: 0; margin: 0; }
+    .refs li { padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+    .refs li .name { font-weight: 700; }
+    .refs li .detail { color: var(--muted); }
+
+    .console-errors { font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--amber); }
+    .console-errors div { padding: 2px 0; }
+
+    .centered { text-align: center; padding: 120px 24px; }
+    .centered h1 { font-size: 30px; font-weight: 800; margin-bottom: 14px; }
+    .centered p { color: var(--muted); font-size: 16px; max-width: 520px; margin: 0 auto 28px; }
+    .spinner {
+      width: 42px; height: 42px; border-radius: 50%;
+      border: 3px solid var(--border); border-top-color: var(--red);
+      margin: 0 auto 28px; animation: spin .8s linear infinite;
+    }
+    .btn-link {
+      display: inline-block; padding: 14px 28px; background: var(--red); color: var(--white);
+      text-decoration: none; border-radius: 8px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 2px; font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+{% macro grade_class(pct) -%}
+  {% if pct >= 75 %}grade-good{% elif pct >= 50 %}grade-mid{% else %}grade-poor{% endif %}
+{%- endmacro %}
+
+{% macro breakdown(title, data) -%}
+  <div class="bd-col">
+    <h4>{{ title }}</h4>
+    {% for name, b in data.items() %}
+      {% set max = b.max if b.max else 1 %}
+      {% set pct = (b.score / max * 100) | round(0, 'floor') %}
+      <div class="bd-row">
+        <div class="top">
+          <span>{{ name }}</span>
+          <span class="v">{{ b.score }} / {{ b.max }}</span>
+        </div>
+        <div class="bar"><span style="width: {{ pct }}%"></span></div>
+      </div>
+    {% endfor %}
+  </div>
+{%- endmacro %}
+
+{% if error %}
+  {# ---------- Fatal failure state ---------- #}
+  <div class="report-wrap">
+    <div class="brand">PINE<span class="dot"></span></div>
+    <div class="centered">
+      <h1>Analysis unavailable</h1>
+      <p>{{ error }}</p>
+      {% if url %}<p class="site-url">{{ url }}</p>{% endif %}
+      <a class="btn-link" href="/">Try another site</a>
+    </div>
+  </div>
+
+{% elif pending %}
+  {# ---------- Still running state ---------- #}
+  <div class="report-wrap">
+    <div class="brand">PINE<span class="dot"></span></div>
+    <div class="centered">
+      <div class="spinner"></div>
+      <h1>Analysis in progress</h1>
+      <p>This report isn't ready yet. The analysis for {{ url }} is still running — it typically takes 45–90 seconds.</p>
+      <a class="btn-link" href="/">Back to start</a>
+    </div>
+  </div>
+  <script>
+    // Bounce back to the live progress view; the report becomes available once the job completes.
+    setTimeout(function () { window.location.reload(); }, 6000);
+  </script>
+
+{% else %}
+  {# ---------- Full report ---------- #}
+  {% set rep = r.report or {} %}
+  {% set scores = r.scores or {} %}
+  {% set verdict = rep.overall_verdict or 'Needs Work' %}
+  {% set vclass = verdict | lower | replace(' ', '-') %}
+
+  <div class="report-wrap">
+
+    <div class="report-head">
+      <div>
+        <div class="brand">PINE<span class="dot"></span></div>
+        <div class="tagline">Site Intelligence Engine</div>
+        <div class="site-url">{{ r.url or url }}</div>
+        {% if r.captures_meta and r.captures_meta.title %}
+          <div class="site-title">{{ r.captures_meta.title }}</div>
+        {% endif %}
+        {% if r.mode == 'uiux' %}<div class="tagline" style="margin-top:8px;">UI/UX Analysis</div>{% endif %}
+      </div>
+      <div><span class="verdict {{ vclass }}">{{ verdict }}</span></div>
+    </div>
+
+    {% if r.partial_stages %}
+      <div class="banner">
+        Some stages could not be completed and were skipped: {{ r.partial_stages | join(', ') }}.
+        All other findings below remain valid.
+      </div>
+    {% endif %}
+
+    {# ---------- Scores ---------- #}
+    {% if scores %}
+      <div class="scores">
+        {% set ui_pct = scores.ui_score or 0 %}
+        {% set ux_pct = scores.ux_score or 0 %}
+        <div class="card score-card">
+          <div class="num {{ grade_class(ui_pct) | trim }}">{{ scores.ui_score }}<span class="den">/100</span></div>
+          <div class="lbl">UI Score</div>
+        </div>
+        <div class="card score-card">
+          <div class="num {{ grade_class(ux_pct) | trim }}">{{ scores.ux_score }}<span class="den">/100</span></div>
+          <div class="lbl">UX Score</div>
+        </div>
+      </div>
+
+      {% if scores.ui_breakdown or scores.ux_breakdown %}
+        <div class="card">
+          <div class="bd-cols">
+            {% if scores.ui_breakdown %}{{ breakdown('UI breakdown', scores.ui_breakdown) }}{% endif %}
+            {% if scores.ux_breakdown %}{{ breakdown('UX breakdown', scores.ux_breakdown) }}{% endif %}
+          </div>
+        </div>
+      {% endif %}
+    {% endif %}
+
+    {# ---------- Executive summary ---------- #}
+    {% if rep.executive_summary %}
+      <div class="section-title">Executive summary</div>
+      <div class="card"><p style="margin:0;">{{ rep.executive_summary }}</p></div>
+    {% endif %}
+
+    {% if rep.key_strength or rep.critical_gap %}
+      <div class="bd-cols">
+        {% if rep.key_strength %}
+          <div class="card bd-col" style="border-color: var(--green);">
+            <h4 style="color: var(--green);">Key strength</h4>
+            <p style="margin:0;">{{ rep.key_strength }}</p>
+          </div>
+        {% endif %}
+        {% if rep.critical_gap %}
+          <div class="card bd-col" style="border-color: var(--red);">
+            <h4 style="color: var(--red);">Critical gap</h4>
+            <p style="margin:0;">{{ rep.critical_gap }}</p>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {# ---------- Recommendations ---------- #}
+    {% if rep.recommendations %}
+      <div class="section-title">Prioritised recommendations ({{ rep.recommendations | length }})</div>
+      {% for rec in rep.recommendations %}
+        {% set sev = (rec.severity or 'low') | lower %}
+        <div class="card rec">
+          <div class="rec-head">
+            <span class="rank">#{{ rec.rank or loop.index }}</span>
+            <h3>{{ rec.title }}</h3>
+            <span class="sev {{ sev }}">{{ sev }}</span>
+          </div>
+          {% if rec.finding %}<div class="field"><span class="k">Finding</span><span class="val">{{ rec.finding }}</span></div>{% endif %}
+          {% if rec.research %}<div class="field"><span class="k">Research / principle</span><span class="val">{{ rec.research }}</span></div>{% endif %}
+          {% if rec.recommendation %}<div class="field"><span class="k">Recommendation</span><span class="val">{{ rec.recommendation }}</span></div>{% endif %}
+          {% if rec.expected_impact %}<div class="field"><span class="k">Expected impact</span><span class="val">{{ rec.expected_impact }}</span></div>{% endif %}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    {# ---------- Cross-reference findings ---------- #}
+    {% if r.crossref %}
+      <div class="section-title">Cross-reference findings</div>
+      {% for f in r.crossref %}
+        {% set xt = (f.type or '') | lower %}
+        <div class="card xref">
+          <div class="xref-head">
+            {% if xt %}<span class="xtype {{ xt }}">{{ xt }}</span>{% endif %}
+            <h3 style="font-size:18px;margin:0;font-weight:800;">{{ f.title }}</h3>
+            {% if f.severity %}<span class="sev {{ f.severity | lower }}">{{ f.severity }}</span>{% endif %}
+          </div>
+          {% if f.implication %}<p style="margin:10px 0 0;">{{ f.implication }}</p>{% endif %}
+          <div class="pair">
+            {% if f.visual_finding %}<div><span class="k">Visual</span>{{ f.visual_finding }}</div>{% endif %}
+            {% if f.code_finding %}<div><span class="k">Code</span>{{ f.code_finding }}</div>{% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    {# ---------- Section-by-section visual read ---------- #}
+    {% if r.sections %}
+      <div class="section-title">Section-by-section read</div>
+      <div class="card">
+        {% for s in r.sections %}
+          <div class="sec-item">
+            <span class="idx">{{ s.index or loop.index }}</span>{{ s.what_is_here }}
+            <div class="meta">
+              {% if s.colour_palette %}<div>Palette: {{ s.colour_palette }}</div>{% endif %}
+              {% if s.element_visibility %}<div>Visibility: {{ s.element_visibility }}</div>{% endif %}
+              {% if s.overlapping_or_obscuring and (s.overlapping_or_obscuring | lower) != 'none' %}
+                <div class="overlap">Obscuring: {{ s.overlapping_or_obscuring }}</div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {# ---------- Screenshots ---------- #}
+    {% set shots = r.screenshots or {} %}
+    {% if shots.desktop or shots.mobile or shots.sections %}
+      <div class="section-title">Captured renders</div>
+      <div class="shots">
+        {% if shots.desktop %}
+          <div class="shot">
+            <div class="cap">Desktop — above the fold</div>
+            <img src="{{ shots.desktop }}" alt="Desktop above-the-fold screenshot">
+          </div>
+        {% endif %}
+        {% if shots.mobile %}
+          <div class="shot mobile">
+            <div class="cap">Mobile</div>
+            <img src="{{ shots.mobile }}" alt="Mobile screenshot">
+          </div>
+        {% endif %}
+      </div>
+      {% if shots.sections %}
+        <div class="shot sections-strip" style="margin-top:20px;">
+          <div class="cap">Full-page scroll</div>
+          {% for uri in shots.sections %}
+            <img src="{{ uri }}" alt="Page section {{ loop.index }}">
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endif %}
+
+    {# ---------- Console errors ---------- #}
+    {% if r.captures_meta and r.captures_meta.console_errors %}
+      <div class="section-title">Console errors ({{ r.captures_meta.console_errors | length }})</div>
+      <div class="card console-errors">
+        {% for e in r.captures_meta.console_errors %}<div>{{ e }}</div>{% endfor %}
+      </div>
+    {% endif %}
+
+    {# ---------- References ---------- #}
+    {% if r.references %}
+      <div class="section-title">Research &amp; benchmarks cited</div>
+      <div class="card">
+        <ul class="refs">
+          {% for ref in r.references %}
+            <li><span class="name">{{ ref.name }}</span> — <span class="detail">{{ ref.detail }}</span></li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    <div class="note" style="margin-top:56px;">
+      <a href="/">Analyse another site</a>
+    </div>
+
+  </div>
+{% endif %}
+
+</body>
+</html>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="130" height="32" viewBox="0 0 130 32" role="img" aria-label="PINE">
+  <text x="0" y="25" font-family="Arial, system-ui, sans-serif" font-size="26"
+        font-weight="800" letter-spacing="3" fill="#FFFFFF">PINE</text>
+  <circle cx="118" cy="22" r="5" fill="#FF2200"/>
+</svg>
