@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design system, Sizo Manana</title>
+<meta name="description" content="The published design language for this site: colour and contrast reasoning, type scale, layout, components, motion, accessibility rules and the performance budget.">
+<meta name="theme-color" content="#0c1712">
+<meta name="author" content="Sizo Manana">
+<meta property="og:title" content="Design system, Sizo Manana">
+<meta property="og:description" content="The published design language for this site: colour and contrast reasoning, type scale, layout, components, motion, accessibility rules and the performance budget.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='0' fill='%230b6e4f'/><text y='70' x='50' text-anchor='middle' font-size='58' font-family='Georgia,serif' fill='%23fbf9f6'>S</text></svg>">
+<link rel="canonical" href="https://sizomanana.github.io/design-system.html">
+<meta property="og:url" content="https://sizomanana.github.io/design-system.html">
+<meta property="og:site_name" content="Sizo Manana">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image" content="https://sizomanana.github.io/assets/img/me/og-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:alt" content="Sizo Manana, portfolio card reading I design interfaces, then I prove they worked">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sizo Manana, CRO and product designer">
+<meta name="twitter:image" content="https://sizomanana.github.io/assets/img/me/og-card.jpg">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<div class="progress" aria-hidden="true"><i></i></div>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="sidebar">
+  <div class="inner">
+    <a class="mark" href="index.html">
+      <img class="avatar" src="assets/img/me/avatar.jpg" alt="" width="128" height="128" decoding="async">
+      <span><b>Sizo Manana</b><span translate="no">CRO and Product Design</span></span>
+    </a>
+    <nav class="sidenav" aria-label="Primary">
+      <a href="index.html">Work</a>
+      <a href="work/wireframes.html">Wireframes</a>
+      <a href="work/interface.html">Interface</a>
+      <a href="work/earlier.html">Earlier</a>
+      <a href="about.html">About</a>
+      <a href="Sizo-Manana-CV.pdf">CV</a>
+      <a class="cta" href="mailto:sizomanana12@gmail.com?subject=Hiring%20enquiry">Hire Me</a>
+    </nav>
+  </div>
+  <div class="rail">
+    <a href="https://www.linkedin.com/in/siphiwo-sizonqoba-manana-8a19591ab/" rel="me">LinkedIn</a>
+    <a href="mailto:sizomanana12@gmail.com">Email</a>
+    <span class="yr">Johannesburg, ZA</span>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero">
+  <div class="narrow wide">
+    <p class="barhead" style="display:inline-block">Design system</p>
+    <h1>The rules this site is built from</h1>
+    <p class="lede">This is the design language file for this site, written before the pages were
+    and read on every build. It is published rather than kept private because a design system you
+    cannot read is a claim, and a design system you can read is evidence.</p>
+    <div class="callout">
+  <p class="callout-title">Why this file exists in this form</p>
+  <p>It follows the DESIGN.md convention, a single design language file an agent or a developer reads before touching anything, so that the decisions live in one place instead of in somebody's memory. Every rule below is enforced by the build: dimensions are read off disk, colour pairs are measured against WCAG, and the accessibility pass runs across every page in both schemes at two widths.</p>
+</div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="narrow wide ds">
+<p>The design language of this site, written so another person or an AI agent can extend it without
+guessing. Everything below is implemented in <code>assets/css/site.css</code>.</p>
+<hr />
+<h2>Intent</h2>
+<p>Bold, block based, high contrast. Structure and styling are adapted from a print styled editorial
+resume reference: a dark fixed sidebar, filled colour bars as section headings, heavy uppercase
+display type, solid colour blocking, and a full bleed black and white portrait.</p>
+<p>Two rules override any aesthetic preference:</p>
+<ol>
+<li><strong>The page must not undermine its own claims.</strong> A site arguing for measurement, accessibility and
+   performance cannot ship layout shift, invisible focus rings or a slow hero.</li>
+<li><strong>No em dashes in the copy.</strong> Commas, colons and full stops. No en dashes either.</li>
+</ol>
+<p>Third rule, added after a specific mistake: <strong>no number appears on this site unless it was measured
+and can be traced.</strong> No rounded estimates, no illustrative figures, no borrowed industry statistics.
+Where a project has no measured outcome, it says so rather than filling the space.</p>
+<hr />
+<h2>Colour</h2>
+<p>Near black with a green cast, warm off white paper, one emerald accent. Light and dark are both
+designed, not inverted.</p>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Light</th>
+<th>Dark</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--ink</code></td>
+<td><code>#0b1410</code></td>
+<td><code>#f1f3f0</code></td>
+<td>Body text, headings</td>
+</tr>
+<tr>
+<td><code>--ink-2</code></td>
+<td><code>#3f4a44</code></td>
+<td><code>#bfc6c1</code></td>
+<td>Secondary text, lede</td>
+</tr>
+<tr>
+<td><code>--ink-3</code></td>
+<td><code>#5d6862</code></td>
+<td><code>#959e98</code></td>
+<td>Captions, metadata, labels</td>
+</tr>
+<tr>
+<td><code>--paper</code></td>
+<td><code>#f8f7f3</code></td>
+<td><code>#0b100d</code></td>
+<td>Page background</td>
+</tr>
+<tr>
+<td><code>--paper-2</code></td>
+<td><code>#efeee8</code></td>
+<td><code>#121a16</code></td>
+<td>Alternating band</td>
+</tr>
+<tr>
+<td><code>--paper-3</code></td>
+<td><code>#e4e3db</code></td>
+<td><code>#1a231e</code></td>
+<td>Image placeholder, code</td>
+</tr>
+<tr>
+<td><code>--line</code></td>
+<td><code>#d6d5cc</code></td>
+<td><code>#26302a</code></td>
+<td>All borders</td>
+</tr>
+<tr>
+<td><code>--green</code></td>
+<td><code>#0b6e4f</code></td>
+<td><code>#2fc98a</code></td>
+<td>Bars, buttons, accents, links</td>
+</tr>
+<tr>
+<td><code>--green-deep</code></td>
+<td><code>#08553d</code></td>
+<td><code>#25a570</code></td>
+<td>Button hover</td>
+</tr>
+<tr>
+<td><code>--on-green</code></td>
+<td><code>#ffffff</code></td>
+<td><code>#04150e</code></td>
+<td>Text on emerald fill</td>
+</tr>
+<tr>
+<td><code>--green-on-dark</code></td>
+<td><code>#35d497</code></td>
+<td><code>#35d497</code></td>
+<td>Accents and links on dark surfaces, both schemes</td>
+</tr>
+<tr>
+<td><code>--dark</code></td>
+<td><code>#0c1712</code></td>
+<td><code>#121a16</code></td>
+<td>Sidebar, footer, <code>.ink</code> sections</td>
+</tr>
+<tr>
+<td><code>--on-dark</code> / <code>--on-dark-2</code></td>
+<td><code>#f2f5f2</code> / <code>#a9b6ae</code></td>
+<td>same</td>
+<td>Text on dark</td>
+</tr>
+</tbody>
+</table>
+<p>One trap found the hard way: <code>section.ink a</code> sets links to the bright accent, and a filled <code>.btn</code> is
+an anchor, so inside a dark section the button rendered accent text on an accent fill. Buttons carry
+an explicit <code>section.ink a.btn</code> override. Any new element that is both an anchor and a filled surface
+needs the same treatment.</p>
+<p><strong>Every pair clears WCAG AA for body text at 4.5:1.</strong> Measured, not assumed. The lowest is
+<code>--ink-3</code> on <code>--paper-2</code> at 4.99:1. A validator in the build computes all 21 pairs and reports any
+that drop below the threshold.</p>
+<h3>The one place the reference could not be copied</h3>
+<p>The reference uses <strong>black type on yellow</strong>. Yellow is a light hue, so black on yellow measures about
+11:1. Emerald is a <strong>dark</strong> hue: near black on emerald measures 2.99:1 and fails outright, while
+white on emerald measures 6.25:1.</p>
+<p>So type on emerald is white here, not black. That is the same contrast logic as the reference,
+inverted by the hue. It is not a softening of the reference, it is the reference applied correctly to
+a different colour.</p>
+<p><code>--green-on-dark</code> exists for a second reason found the same way: the light mode emerald sitting on a
+dark sidebar or footer measures 2.93:1. Accents on dark surfaces use the brighter green in both
+schemes.</p>
+<hr />
+<h2>Type</h2>
+<p><strong>No web fonts.</strong> Stated openly on the site. Nothing to download, no invisible text during a font
+swap, no third party request.</p>
+<ul>
+<li>Everything: system sans stack (<code>ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, …</code>)</li>
+<li>Code, counters and browser chrome labels: system mono stack</li>
+</ul>
+<p>The reference's impact comes mostly from weight, scale, tracking and colour blocking rather than from
+its typeface, so the system stack carries it. Trade off worth knowing: a geometric display face would
+get closer to the reference, at the cost of the no third party request promise. The promise was kept.</p>
+<ul>
+<li><code>h1</code>: <code>--step-4</code>, weight 800, uppercase, <code>letter-spacing: -.028em</code>, <code>line-height: 1.05</code></li>
+<li><code>h2</code>, <code>h3</code>: weight 800, sentence case, tight tracking</li>
+<li>Bar headings, eyebrows, kickers, buttons, nav: uppercase, weight 800, <code>letter-spacing</code> .1em to .2em</li>
+<li>Body: <code>line-height: 1.62</code>, <code>text-wrap: pretty</code>. Headings <code>text-wrap: balance</code></li>
+<li>Numbers in metric blocks: <code>font-variant-numeric: tabular-nums</code></li>
+<li>Measure: <code>--readw</code> is <code>72ch</code> for prose, <code>90ch</code> where prose carries figures</li>
+</ul>
+<h3>Copy conventions</h3>
+<ul>
+<li><strong>Sentence case for editorial headings and h1 in uppercase via CSS.</strong> Title Case for buttons and
+  navigation only.</li>
+<li>First person. This is a portfolio, not product UI.</li>
+<li>Curly quotes. The ellipsis character, never three full stops.</li>
+<li><code>translate="no"</code> on role labels so machine translation does not garble them.</li>
+</ul>
+<p>Note on the Vercel Web Interface Guidelines, which this site was built against: it calls for Title
+Case on all headings and second person prose. Both are right for product interface copy and wrong for
+editorial writing, so they were adopted for buttons and navigation and declined for headings and
+body. That is a decision, not an oversight.</p>
+<hr />
+<h2>Layout</h2>
+<ul>
+<li><code>--side</code> is <code>236px</code>. Below 1080px the sidebar becomes a sticky top bar and <code>body</code> loses its left
+  padding. Above 1080px the sidebar is <code>position: fixed</code> full height, with the contact rail pinned to
+  the bottom.</li>
+<li><code>.wrap</code> is the <code>1120px</code> container. <code>.narrow</code> is the prose column, <code>.narrow.wide</code> for prose with
+  figures.</li>
+<li>Sections alternate <code>--paper</code>, <code>.alt</code> (<code>--paper-2</code>) and <code>.ink</code> (dark). Never three of the same in a
+  row.</li>
+<li><strong>No border radius anywhere.</strong> Squared corners are part of the reference language.</li>
+<li>Borders are <code>1.5px</code> on content, <code>2px</code> or <code>3px</code> where a rule is doing structural work. Depth comes
+  from borders, background steps and solid blocks, never from shadow. There are no shadows.</li>
+</ul>
+<hr />
+<h2>Components</h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Purpose</th>
+<th>Rules</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.sidebar</code></td>
+<td>Fixed nav</td>
+<td>Dark. Uppercase nav, emerald glyph mark, emerald underline on the current page, emerald CTA. Collapses to a sticky top bar under 1080px</td>
+</tr>
+<tr>
+<td><code>.barhead</code></td>
+<td>Section heading</td>
+<td>Solid emerald bar, white uppercase text, wide tracking. The signature device</td>
+</tr>
+<tr>
+<td><code>.hero-split</code></td>
+<td>Page opener</td>
+<td>Heavy uppercase h1 with <code>&lt;mark&gt;</code> for the emerald highlight block, beside a full bleed black and white portrait with an emerald stamp</td>
+</tr>
+<tr>
+<td><code>.card</code></td>
+<td>Project card</td>
+<td>Bordered, 16:10 cover in a <code>.shot</code> wrapper, emerald number badge top left, uppercase kicker, hover lifts and turns the border emerald</td>
+</tr>
+<tr>
+<td><code>.ba</code></td>
+<td>Before and after</td>
+<td>Two figures side by side, stacked under 820px. Before tag is ink, after tag is emerald. Never a drag slider</td>
+</tr>
+<tr>
+<td><code>.scroller</code></td>
+<td>Full page viewer</td>
+<td>Dark browser bar with a mono label, <code>max-height: min(70vh, 620px)</code>, <code>overscroll-behavior: contain</code>, pane focusable with <code>tabindex="0"</code> and an <code>aria-label</code></td>
+</tr>
+<tr>
+<td><code>.metrics</code></td>
+<td>Measured figures</td>
+<td>Bordered grid, emerald tabular number. <strong>Only used where the number was measured.</strong> Pages without measured outcomes have no metric block</td>
+</tr>
+<tr>
+<td><code>.pillars</code></td>
+<td>Structure diagram</td>
+<td>Hairline grid of numbered blocks. Always captioned as a diagram, never presented as a screenshot</td>
+</tr>
+<tr>
+<td><code>.flow</code></td>
+<td>Sequence diagram</td>
+<td>Numbered rows with a mono counter, emerald top rule</td>
+</tr>
+<tr>
+<td><code>.callout</code></td>
+<td>Aside</td>
+<td>Left emerald border on a wash. <code>.win</code> for what I would do differently, <code>.note</code> for a caveat. Title is a <code>&lt;p class="callout-title"&gt;</code>, never a heading, so the outline stays clean</td>
+</tr>
+<tr>
+<td><code>.pull</code></td>
+<td>Pull quote</td>
+<td>Heavy, emerald top rule, one per page maximum</td>
+</tr>
+<tr>
+<td><code>.video</code></td>
+<td>Lazy video</td>
+<td>A real <code>&lt;button&gt;</code> with <code>aria-label</code>. Nothing loads from YouTube until pressed, then a <code>youtube-nocookie.com</code> iframe replaces the button</td>
+</tr>
+<tr>
+<td><code>.timeline</code></td>
+<td>Career arc</td>
+<td>An <code>&lt;ol&gt;</code> with a rail, nodes that activate as they pass 58 percent of the viewport, and a fill height driven by a <code>--fill</code> custom property. The fill is a pseudo element, not a child span, because a span is not valid inside an <code>&lt;ol&gt;</code></td>
+</tr>
+<tr>
+<td><code>.jumpnav</code></td>
+<td>Long form navigation</td>
+<td>Sticky section links with an active state tracked by <code>IntersectionObserver</code>. Used on pages long enough that a reader needs to know where they are</td>
+</tr>
+<tr>
+<td><code>.progress</code></td>
+<td>Reading progress</td>
+<td>A fixed 3px bar driven by <code>transform: scaleX()</code>, offset by the sidebar width on desktop. Hidden entirely under reduced motion</td>
+</tr>
+<tr>
+<td><code>.reveal</code></td>
+<td>Long image disclosure</td>
+<td>Full page mobile designs run to 10,000 pixels and more. Clipped to 600px with a fade, expanded by a real <code>&lt;button&gt;</code> carrying <code>aria-expanded</code>. The clip is applied by script on load, so with JavaScript off the full image simply shows rather than being hidden</td>
+</tr>
+</tbody>
+</table>
+<h3>Before and after: why not a slider</h3>
+<p>A drag slider is a gesture only interaction, needs keyboard and tap alternatives, performs badly on
+long images, and makes the visitor work to see the comparison. The comparison is the content, so it
+should not sit behind an interaction.</p>
+<h3>Diagrams are labelled as diagrams</h3>
+<p><code>.pillars</code> and <code>.flow</code> render structures documented in a brief, drawn for the site. Every instance
+carries a caption saying so. A diagram presented as a product screenshot is a fabrication, and this
+site had one fabricated section in an early draft, which is why the rule is written down.</p>
+<hr />
+<h2>Motion</h2>
+<ul>
+<li>Only <code>transform</code>, <code>opacity</code>, <code>background-color</code>, <code>border-color</code>, <code>color</code>. Never <code>transition: all</code>.</li>
+<li>Disclosure is instant, not animated. Expanding a 10,000 pixel image with a height transition is a
+  jank generator for no benefit.</li>
+<li>160ms, <code>ease</code>.</li>
+<li>Every transition and the smooth scroll are disabled under <code>prefers-reduced-motion: reduce</code>.</li>
+<li>No scroll driven animation, no entrance animation, no parallax.</li>
+</ul>
+<hr />
+<h2>Accessibility, non-negotiable</h2>
+<ul>
+<li>Skip link first in the DOM.</li>
+<li><code>:focus-visible</code>, <code>3px</code> emerald outline, <code>3px</code> offset. <code>outline: none</code> appears nowhere.</li>
+<li>Semantic HTML first. Buttons for actions, anchors for navigation. No <code>&lt;div&gt;</code> with a click handler.</li>
+<li>Headings strictly hierarchical, one <code>h1</code> per page, no level skipped. Validated.</li>
+<li>Real alt text on every image, describing what it shows. Never "screenshot".</li>
+<li><code>[id] { scroll-margin-top: 5rem }</code> so anchors clear the sticky bar.</li>
+<li><code>env(safe-area-inset-*)</code> on the sidebar and footer.</li>
+<li><code>touch-action: manipulation</code>. Zoom never disabled.</li>
+</ul>
+<hr />
+<h2>Performance budget</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Budget</th>
+<th>Actual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CSS</td>
+<td>under 25 KB</td>
+<td>about 21 KB, one file, no framework</td>
+</tr>
+<tr>
+<td>JavaScript</td>
+<td>under 4 KB</td>
+<td>about 2.8 KB, for the reading progress bar, the timeline fill, the jump nav active state, the long image disclosure and the lazy video</td>
+</tr>
+<tr>
+<td>Third party requests on load</td>
+<td>zero</td>
+<td>zero</td>
+</tr>
+<tr>
+<td>Cookies</td>
+<td>zero</td>
+<td>zero</td>
+</tr>
+<tr>
+<td>Images with explicit dimensions</td>
+<td>100 percent</td>
+<td>100 percent, written at build time from the file on disk</td>
+</tr>
+<tr>
+<td>Below fold images lazy loaded</td>
+<td>100 percent</td>
+<td>100 percent</td>
+</tr>
+</tbody>
+</table>
+<p>The hero portrait uses <code>fetchpriority="high"</code>. Everything else is <code>loading="lazy"</code> with
+<code>decoding="async"</code>.</p>
+<hr />
+<h2>How the site is built</h2>
+<p><code>build_site.py</code> generates every page. Content lives in the script, structure in helper functions
+(<code>fig</code>, <code>ba</code>, <code>scroller</code>, <code>metrics</code>, <code>callout</code>, <code>kv</code>), and the shell is one function so the sidebar,
+footer and meta tags cannot drift between pages. Image dimensions are read off disk with Pillow at
+build time, which is why no image can ship without <code>width</code> and <code>height</code>.</p>
+<p>Two validators run after every build:</p>
+<ol>
+<li><strong>Static:</strong> em and en dashes, heading hierarchy, one <code>h1</code> per page, alt text and dimensions on
+   every image, every internal link resolving, every image file present, the anti pattern list, and
+   all 21 colour contrast pairs.</li>
+<li><strong>Browser,</strong> Chromium via Playwright at 1440, 900 and 390 pixels wide in light and dark: console
+   errors, page errors, image decoding, horizontal overflow, focus ring visibility on tab, and that
+   the video button creates exactly one <code>youtube-nocookie</code> iframe and only after a click.</li>
+</ol>
+<p>Both must pass before the site is packaged.</p>
+<hr />
+<h2>Metadata and the social card</h2>
+<p>Every page carries a canonical URL and an <code>og:url</code> built from its own output path at write time, not
+typed by hand, so a page cannot ship somebody else's canonical and a new page gets both for free.</p>
+<p>One social card serves the whole site: 1200 by 630, generated from the same tokens and the same
+portrait as the site itself, declared with <code>og:image:width</code>, <code>og:image:height</code> and <code>og:image:alt</code>, and
+mirrored to <code>twitter:card</code> as <code>summary_large_image</code>. A portfolio whose only distribution channel is a
+link pasted into a profile cannot afford to preview as bare text.</p>
+<p>The home page carries <code>ProfilePage</code> and <code>Person</code> structured data, so a search for the person returns
+an entity rather than a document.</p>
+<hr />
+<h2>Image formats</h2>
+<p>New images ship as WebP. Existing JPEG covers stay as they are, because rewriting them would change
+bytes without changing anything a visitor experiences, and the point of a performance budget is the
+visitor rather than the score. Every image, in either format, still carries its own width and height
+read off disk at build time.</p>
+<hr />
+<h2>The notes component</h2>
+<p><code>ul.notes</code> republishes annotations that were originally written inside a design file as real text
+rather than as pixels inside a screenshot. Left rule in the accent, quiet source line beneath in the
+mono face.</p>
+<p>The reason is not decoration. Text baked into an image is invisible to a screen reader and to a
+search engine, and it cannot be selected or quoted. If the reasoning is the valuable part of a
+wireframe, it does not belong in the JPEG.</p>
+<hr />
+<h2>Extending it</h2>
+<ul>
+<li><strong>New project:</strong> add a dict to <code>PROJECTS</code>, add a body block, run the build. Card, numbering,
+  ordering and previous or next navigation follow automatically.</li>
+<li><strong>Colour change:</strong> change the token, run the build, read the contrast table. If a pair drops below
+  4.5:1, pick a different value rather than shipping it.</li>
+<li><strong>New component:</strong> document it here first, then add it to the stylesheet. A pattern not in this file
+  is not in the system.</li>
+</ul>
+  </div>
+</section>
+
+<section class="ink">
+  <div class="narrow wide">
+    <h2>Where to look next</h2>
+    <div class="cta-row">
+      <a class="btn" href="work/wireframes.html">Wireframes and IA</a>
+      <a class="btn ghost" href="work/interface.html">Interface and systems</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h2>This page has one conversion goal</h2>
+        <p>It is me. Open to CRO, UX and product design roles, remote, on UK or EU hours,
+        permanent.</p>
+        <p><a href="mailto:sizomanana12@gmail.com">sizomanana12@gmail.com</a></p>
+        <p><a href="https://www.linkedin.com/in/siphiwo-sizonqoba-manana-8a19591ab/" rel="me">LinkedIn</a></p>
+        <p style="margin-top:1.1rem"><a class="btn" href="mailto:sizomanana12@gmail.com?subject=Hiring%20enquiry">Hire Me</a></p>
+      </div>
+      <div>
+        <span class="k">Where</span>
+        <p>Johannesburg, South Africa</p>
+        <p>Available immediately</p>
+      </div>
+      <div>
+        <span class="k">Elsewhere</span>
+        <p><a href="Sizo-Manana-CV.pdf">Download the CV</a></p>
+        <p><a href="index.html#work">All work</a></p>
+        <p><a href="about.html">About me</a></p>
+        <p><a href="design-system.html" aria-current="page">Design system</a></p>
+      </div>
+    </div>
+    <p class="legal">Client work shown with permission. Where a figure appears it comes from
+    analytics or reporting I produced or instrumented, and the case study states what it does and does
+    not prove. No estimated, rounded or illustrative numbers appear anywhere on this site. Built as
+    static HTML and CSS with no web fonts, no analytics and no cookies.</p>
+  </div>
+</footer>
+<script>
+(function(){
+  function init(){
+    document.querySelectorAll('[data-reveal]').forEach(function(el){
+      if(el.scrollHeight <= 760) return;
+      el.classList.add('is-clipped');
+      var b=document.createElement('button');
+      b.type='button'; b.className='reveal-btn'; b.setAttribute('aria-expanded','false');
+      b.textContent='Show the Full Page';
+      b.addEventListener('click',function(){
+        var open=!el.classList.toggle('is-clipped');
+        b.setAttribute('aria-expanded',String(open));
+        b.textContent=open?'Show Less':'Show the Full Page';
+        if(!open){b.scrollIntoView({block:'nearest'});}
+      });
+      el.insertAdjacentElement('afterend',b);
+    });
+  }
+  function raf(fn){var q=false;return function(){if(!q){q=true;requestAnimationFrame(function(){fn();q=false;});}};}
+  function progress(){
+    var bar=document.querySelector('.progress i'); if(!bar) return;
+    var tick=function(){
+      var h=document.documentElement.scrollHeight-window.innerHeight;
+      bar.style.transform='scaleX('+(h>0?Math.min(1,window.scrollY/h):0)+')';
+    };
+    var on=raf(tick);
+    addEventListener('scroll',on,{passive:true}); addEventListener('resize',on,{passive:true}); tick();
+  }
+  function timeline(){
+    var tl=document.querySelector('.timeline'); if(!tl) return;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var nodes=[].slice.call(tl.querySelectorAll('li'));
+    var tick=function(){
+      var r=tl.getBoundingClientRect(), mid=window.innerHeight*0.58;
+      tl.style.setProperty('--fill', Math.max(0,Math.min(r.height, mid-r.top))+'px');
+      nodes.forEach(function(n){
+        var t=n.getBoundingClientRect().top;
+        if(t<mid){n.classList.add('on');}else{n.classList.remove('on');}
+      });
+    };
+    var on=raf(tick);
+    addEventListener('scroll',on,{passive:true}); addEventListener('resize',on,{passive:true}); tick();
+  }
+  function jumpnav(){
+    var jn=document.querySelector('.jumpnav');
+    if(!jn||!('IntersectionObserver' in window)) return;
+    var links=[].slice.call(jn.querySelectorAll('a')), map={};
+    links.forEach(function(a){
+      var id=a.getAttribute('href').slice(1), t=document.getElementById(id);
+      if(t){map[id]=a;}
+    });
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!e.isIntersecting) return;
+        links.forEach(function(a){a.classList.remove('on');});
+        if(map[e.target.id]){map[e.target.id].classList.add('on');}
+      });
+    },{rootMargin:'-18% 0px -70% 0px'});
+    Object.keys(map).forEach(function(id){io.observe(document.getElementById(id));});
+  }
+  function boot(){init();progress();timeline();jumpnav();}
+  if(document.readyState!=='loading'){boot();}else{document.addEventListener('DOMContentLoaded',boot);}
+})();
+</script>
+</body>
+</html>

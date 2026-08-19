@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cambridge Commodities quote cockpit, Sizo Manana</title>
+<meta name="description" content="Designing a CPQ quote cockpit as a HubSpot UI extension, inside a platform that permits no custom CSS. 43 frames, live ERP data, and failure states as first class flows.">
+<meta name="theme-color" content="#0c1712">
+<meta name="author" content="Sizo Manana">
+<meta property="og:title" content="Cambridge Commodities quote cockpit, Sizo Manana">
+<meta property="og:description" content="Designing a CPQ quote cockpit as a HubSpot UI extension, inside a platform that permits no custom CSS. 43 frames, live ERP data, and failure states as first class flows.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='0' fill='%230b6e4f'/><text y='70' x='50' text-anchor='middle' font-size='58' font-family='Georgia,serif' fill='%23fbf9f6'>S</text></svg>">
+<link rel="canonical" href="https://sizomanana.github.io/work/cambridge.html">
+<meta property="og:url" content="https://sizomanana.github.io/work/cambridge.html">
+<meta property="og:site_name" content="Sizo Manana">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image" content="https://sizomanana.github.io/assets/img/me/og-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:alt" content="Sizo Manana, portfolio card reading I design interfaces, then I prove they worked">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sizo Manana, CRO and product designer">
+<meta name="twitter:image" content="https://sizomanana.github.io/assets/img/me/og-card.jpg">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+<div class="progress" aria-hidden="true"><i></i></div>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="sidebar">
+  <div class="inner">
+    <a class="mark" href="../index.html">
+      <img class="avatar" src="../assets/img/me/avatar.jpg" alt="" width="128" height="128" decoding="async">
+      <span><b>Sizo Manana</b><span translate="no">CRO and Product Design</span></span>
+    </a>
+    <nav class="sidenav" aria-label="Primary">
+      <a href="../index.html" aria-current="page">Work</a>
+      <a href="../work/wireframes.html">Wireframes</a>
+      <a href="../work/interface.html">Interface</a>
+      <a href="../work/earlier.html">Earlier</a>
+      <a href="../about.html">About</a>
+      <a href="../Sizo-Manana-CV.pdf">CV</a>
+      <a class="cta" href="mailto:sizomanana12@gmail.com?subject=Hiring%20enquiry">Hire Me</a>
+    </nav>
+  </div>
+  <div class="rail">
+    <a href="https://www.linkedin.com/in/siphiwo-sizonqoba-manana-8a19591ab/" rel="me">LinkedIn</a>
+    <a href="mailto:sizomanana12@gmail.com">Email</a>
+    <span class="yr">Johannesburg, ZA</span>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero">
+  <div class="narrow wide">
+    <p class="barhead">Enterprise product design</p>
+    <h1>A quoting cockpit built inside a platform that will not let you write CSS</h1>
+    <p class="lede">Cambridge Commodities is a bulk ingredient supplier. Their sales reps were
+    building quotes across multiple products, each with several scenario lines varying by quantity,
+    warehouse and dispatch date, every line needing live cost and stock data from an ERP. It was
+    slow, and it lived nowhere near the CRM.</p>
+    <div class="kv">
+  <div><span class="k">My role</span><span class="v">UI, UX and CRO design lead</span></div>
+  <div><span class="k">Team</span><span class="v">One project manager, one developer</span></div>
+  <div><span class="k">Platform</span><span class="v">HubSpot UI extension, a React app embedded in a CRM record page</span></div>
+  <div><span class="k">Data sources</span><span class="v">Ross ERP for live cost and stock, Snowflake for historical pricing</span></div>
+  <div><span class="k">Commercial</span><span class="v">Delivery lead on a workstream valued at 52,000 US dollars</span></div>
+  <div><span class="k">Status</span><span class="v">Shipped</span></div>
+</div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap">
+    <figure>
+  <img src="../assets/img/cambridge/record-page.jpg" alt="The quote cockpit inside a HubSpot CRM record page, showing three columns: quote header on the left, the quoting cockpit in the middle and a historical intelligence panel on the right" width="1600" height="900" fetchpriority="high" decoding="async">
+  <figcaption>The three zone record page. Quote header, quoting cockpit, historical intelligence, each scrolling independently inside a 1920 pixel viewport.</figcaption>
+</figure>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="narrow wide">
+    <h2 style="margin-top:0">The constraint that produced the design</h2>
+    <p>HubSpot UI extensions allow no custom CSS. You build only from HubSpot's own component
+    library, at the sizes those components come in. There is no talking your way around it and no
+    clever workaround. If a decision cannot be expressed in a real component at its real size, it is
+    not a decision, it is a wish.</p>
+    <p>I have come to think this is a better way to work than having a blank canvas, because a
+    constraint forces you to justify things you would otherwise settle by taste.</p>
+
+    <div class="callout">
+  <p class="callout-title">Click to edit was not a style choice</p>
+  <p>HubSpot's <code>Input</code>, <code>Select</code> and <code>DateInput</code> components are 240 pixels wide across all 488 variants. Three editable columns at native size consume 720 of the 774 pixels available in that card. There was no version of this where three inputs sat side by side. So editable cells became compact, and open the real control on click. The pattern came out of the measurements, not out of a moodboard.</p>
+</div>
+
+    <figure>
+  <img src="../assets/img/cambridge/click-to-edit.jpg" alt="A scenario line where clicking a compact cell has opened a full width native HubSpot input control over the top of it" width="1060" height="931" loading="lazy" decoding="async">
+  <figcaption>The click to edit pattern. The compact cell holds the value, the native control opens over it at its real 240 pixel width.</figcaption>
+</figure>
+
+    <h3>What I verified instead of assumed</h3>
+    <p>The scenario table is 973 pixels wide inside a 794 pixel card. Most designers hand that over
+    and find out during build whether it works. I checked HubSpot's documentation first and confirmed
+    that <code>TableCell width="min"</code> overflows and produces a horizontal scrollbar, so the
+    overflow was designed behaviour rather than a surprise for the developer.</p>
+    <p>That is a small thing. It is also the difference between a handover a developer can build and
+    one they have to reinterpret.</p>
+
+    <figure>
+  <img src="../assets/img/cambridge/component-kit.jpg" alt="A canvas page holding the live HubSpot component palette, with real component instances rather than local copies" width="1120" height="2788" loading="lazy" decoding="async">
+  <figcaption>Roughly 3,000 real HubSpot component instances against two local copies. Designing with the actual library rather than a redrawn version of it is what made the pixel arguments possible.</figcaption>
+</figure>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow wide">
+    <h2 style="margin-top:0">Designing the consequences of the architecture</h2>
+    <p>The system never stores ERP costs. That is deliberate and it is the right call technically,
+    but it has a consequence a sales rep will feel: reopen a quote and the prices are blank until you
+    re-simulate. That is counterintuitive enough that it deserved its own screen and its own
+    explanation, rather than a rep assuming the tool had lost their work.</p>
+    <p>I also proposed that editing any ERP input, quantity, warehouse or dispatch date, should clear
+    that line's prices and un-tick it as Won, because the stored figures no longer describe the line.
+    I reasoned that from the architecture and flagged it for the developer to confirm rather than
+    asserting it as settled.</p>
+    <figure>
+  <img src="../assets/img/cambridge/zero-bloat.jpg" alt="A reopened quote with the calculated price columns empty, awaiting re-simulation" width="1060" height="696" loading="lazy" decoding="async">
+  <figcaption>A reopened quote before re-simulation. Designing for a data model decision, not just a screen.</figcaption>
+</figure>
+  </div>
+</section>
+
+<section>
+  <div class="narrow wide">
+    <h2 style="margin-top:0">Failure states as first class flows</h2>
+    <p>Most design work ships the happy path and leaves engineering to invent the error states. I
+    think that is backwards, because the error states are where a sales rep loses trust in a tool,
+    and a tool a rep does not trust does not get used.</p>
+    <ul class="list-clean">
+      <li>Partial ERP failure, where some lines return and others do not</li>
+      <li>ERP order rejection, with two distinct recovery routes that produce genuinely different orders</li>
+      <li>Snowflake unreachable, so the historical intelligence panel has no data to show, without blocking quoting</li>
+      <li>A mandatory re-simulation gate that catches a stock shortage before anything is written</li>
+    </ul>
+    <div class="fig-grid two">
+      <figure>
+  <img src="../assets/img/cambridge/fail-erp.jpg" alt="One product block showing an ERP error while the other blocks are unaffected" width="1060" height="809" loading="lazy" decoding="async">
+  <figcaption>Partial ERP failure. One block errored, the rest carried on.</figcaption>
+</figure>
+      <figure>
+  <img src="../assets/img/cambridge/fail-gate.jpg" alt="A blocking modal requiring re-simulation before the quote can be converted to a sale" width="1060" height="888" loading="lazy" decoding="async">
+  <figcaption>The re-simulation gate, blocking conversion until the figures are current.</figcaption>
+</figure>
+    </div>
+    <figure>
+  <img src="../assets/img/cambridge/fail-rejected.jpg" alt="An order rejected by the Ross ERP with a stock shortage message, showing that nothing was created in the ERP" width="1060" height="940" loading="lazy" decoding="async">
+  <figcaption>Rejected by Ross with a stock shortage. Nothing was created, and the rep is told exactly that, because the alternative is a rep who does not know whether an order exists.</figcaption>
+</figure>
+    <ul class="metrics">
+  <li class="metric"><div class="num">43</div><div class="lbl">frames covering the full quote lifecycle</div></li>
+  <li class="metric"><div class="num">6</div><div class="lbl">named prototype walkthroughs, three of them client facing</div></li>
+  <li class="metric"><div class="num">3,000+</div><div class="lbl">real HubSpot component instances against two local copies</div></li>
+  <li class="metric"><div class="num">3</div><div class="lbl">open architectural questions annotated rather than decided silently</div></li>
+</ul>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow wide">
+    <h2 style="margin-top:0">The whole system on one canvas</h2>
+    <p>Every frame is prefixed and sequenced, from the first run empty state through partial
+    failure, blocking gates, rejection recovery and an eight product, 48 line scale test. A project
+    manager or a developer can open this file and find the state they need without me in the room.</p>
+    <figure>
+  <img src="../assets/img/cambridge/canvas-map.jpg" alt="An index frame mapping every screen in the file, sequenced from empty state through failure states and scale tests" width="1180" height="1073" loading="lazy" decoding="async">
+  <figcaption>The index frame. Six named walkthroughs, plain language handover, and the reason the project manager and developer could run client sessions without me.</figcaption>
+</figure>
+    <figure>
+  <img src="../assets/img/cambridge/drilldown.jpg" alt="The full 1920 pixel record page with the historical pricing drill-down modal open over it" width="1600" height="938" loading="lazy" decoding="async">
+  <figcaption>The history drill-down as the rep actually sees it, at full width, with the panel behaviour driven by whichever product block is open.</figcaption>
+</figure>
+  </div>
+</section>
+
+<section>
+  <div class="narrow wide">
+    <p class="pull">The three questions I could not answer, I annotated for the developer instead of
+    deciding them quietly: whether line IDs renumber after a delete, whether multiple product blocks
+    can expand at once, and whether committing an ERP input should invalidate that line.</p>
+    <p>I would rather hand over a design with three honest open questions on it than one that looks
+    finished and quietly guesses. The guesses are the expensive part, because nobody knows they were
+    guesses until the build is half done.</p>
+    <div class="callout win">
+  <p class="callout-title">What I would do differently</p>
+  <p>I would have pulled the developer into the component measurement work a week earlier. I established the 240 pixel constraint myself and then designed against it, which worked, but he had that knowledge already and we could have skipped a cycle. Being right on your own is slower than being right together.</p>
+</div>
+  </div>
+</section>
+<section class="alt">
+<div class="narrow wide">
+<div class="pn" style="border-top:0;margin-top:0;padding-top:0">
+<a href="../index.html"><span>Back to</span>All work</a>
+<a href="pine.html"><span>Next project</span>Pine audit engine <span class="arrow" aria-hidden="true">&rarr;</span></a>
+</div>
+</div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h2>This page has one conversion goal</h2>
+        <p>It is me. Open to CRO, UX and product design roles, remote, on UK or EU hours,
+        permanent.</p>
+        <p><a href="mailto:sizomanana12@gmail.com">sizomanana12@gmail.com</a></p>
+        <p><a href="https://www.linkedin.com/in/siphiwo-sizonqoba-manana-8a19591ab/" rel="me">LinkedIn</a></p>
+        <p style="margin-top:1.1rem"><a class="btn" href="mailto:sizomanana12@gmail.com?subject=Hiring%20enquiry">Hire Me</a></p>
+      </div>
+      <div>
+        <span class="k">Where</span>
+        <p>Johannesburg, South Africa</p>
+        <p>Available immediately</p>
+      </div>
+      <div>
+        <span class="k">Elsewhere</span>
+        <p><a href="../Sizo-Manana-CV.pdf">Download the CV</a></p>
+        <p><a href="../index.html#work">All work</a></p>
+        <p><a href="../about.html">About me</a></p>
+        <p><a href="../design-system.html">Design system</a></p>
+      </div>
+    </div>
+    <p class="legal">Client work shown with permission. Where a figure appears it comes from
+    analytics or reporting I produced or instrumented, and the case study states what it does and does
+    not prove. No estimated, rounded or illustrative numbers appear anywhere on this site. Built as
+    static HTML and CSS with no web fonts, no analytics and no cookies.</p>
+  </div>
+</footer>
+<script>
+(function(){
+  function init(){
+    document.querySelectorAll('[data-reveal]').forEach(function(el){
+      if(el.scrollHeight <= 760) return;
+      el.classList.add('is-clipped');
+      var b=document.createElement('button');
+      b.type='button'; b.className='reveal-btn'; b.setAttribute('aria-expanded','false');
+      b.textContent='Show the Full Page';
+      b.addEventListener('click',function(){
+        var open=!el.classList.toggle('is-clipped');
+        b.setAttribute('aria-expanded',String(open));
+        b.textContent=open?'Show Less':'Show the Full Page';
+        if(!open){b.scrollIntoView({block:'nearest'});}
+      });
+      el.insertAdjacentElement('afterend',b);
+    });
+  }
+  function raf(fn){var q=false;return function(){if(!q){q=true;requestAnimationFrame(function(){fn();q=false;});}};}
+  function progress(){
+    var bar=document.querySelector('.progress i'); if(!bar) return;
+    var tick=function(){
+      var h=document.documentElement.scrollHeight-window.innerHeight;
+      bar.style.transform='scaleX('+(h>0?Math.min(1,window.scrollY/h):0)+')';
+    };
+    var on=raf(tick);
+    addEventListener('scroll',on,{passive:true}); addEventListener('resize',on,{passive:true}); tick();
+  }
+  function timeline(){
+    var tl=document.querySelector('.timeline'); if(!tl) return;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var nodes=[].slice.call(tl.querySelectorAll('li'));
+    var tick=function(){
+      var r=tl.getBoundingClientRect(), mid=window.innerHeight*0.58;
+      tl.style.setProperty('--fill', Math.max(0,Math.min(r.height, mid-r.top))+'px');
+      nodes.forEach(function(n){
+        var t=n.getBoundingClientRect().top;
+        if(t<mid){n.classList.add('on');}else{n.classList.remove('on');}
+      });
+    };
+    var on=raf(tick);
+    addEventListener('scroll',on,{passive:true}); addEventListener('resize',on,{passive:true}); tick();
+  }
+  function jumpnav(){
+    var jn=document.querySelector('.jumpnav');
+    if(!jn||!('IntersectionObserver' in window)) return;
+    var links=[].slice.call(jn.querySelectorAll('a')), map={};
+    links.forEach(function(a){
+      var id=a.getAttribute('href').slice(1), t=document.getElementById(id);
+      if(t){map[id]=a;}
+    });
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!e.isIntersecting) return;
+        links.forEach(function(a){a.classList.remove('on');});
+        if(map[e.target.id]){map[e.target.id].classList.add('on');}
+      });
+    },{rootMargin:'-18% 0px -70% 0px'});
+    Object.keys(map).forEach(function(id){io.observe(document.getElementById(id));});
+  }
+  function boot(){init();progress();timeline();jumpnav();}
+  if(document.readyState!=='loading'){boot();}else{document.addEventListener('DOMContentLoaded',boot);}
+})();
+</script>
+</body>
+</html>

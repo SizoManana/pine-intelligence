@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interface and systems, Sizo Manana</title>
+<meta name="description" content="The interface craft behind the case studies: component constraints, design systems, light and dark pairs, failure states, templates, mobile and accessibility.">
+<meta name="theme-color" content="#0c1712">
+<meta name="author" content="Sizo Manana">
+<meta property="og:title" content="Interface and systems, Sizo Manana">
+<meta property="og:description" content="The interface craft behind the case studies: component constraints, design systems, light and dark pairs, failure states, templates, mobile and accessibility.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='0' fill='%230b6e4f'/><text y='70' x='50' text-anchor='middle' font-size='58' font-family='Georgia,serif' fill='%23fbf9f6'>S</text></svg>">
+<link rel="canonical" href="https://sizomanana.github.io/work/interface.html">
+<meta property="og:url" content="https://sizomanana.github.io/work/interface.html">
+<meta property="og:site_name" content="Sizo Manana">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image" content="https://sizomanana.github.io/assets/img/me/og-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:alt" content="Sizo Manana, portfolio card reading I design interfaces, then I prove they worked">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sizo Manana, CRO and product designer">
+<meta name="twitter:image" content="https://sizomanana.github.io/assets/img/me/og-card.jpg">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+<div class="progress" aria-hidden="true"><i></i></div>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="sidebar">
+  <div class="inner">
+    <a class="mark" href="../index.html">
+      <img class="avatar" src="../assets/img/me/avatar.jpg" alt="" width="128" height="128" decoding="async">
+      <span><b>Sizo Manana</b><span translate="no">CRO and Product Design</span></span>
+    </a>
+    <nav class="sidenav" aria-label="Primary">
+      <a href="../index.html">Work</a>
+      <a href="../work/wireframes.html">Wireframes</a>
+      <a href="../work/interface.html" aria-current="page">Interface</a>
+      <a href="../work/earlier.html">Earlier</a>
+      <a href="../about.html">About</a>
+      <a href="../Sizo-Manana-CV.pdf">CV</a>
+      <a class="cta" href="mailto:sizomanana12@gmail.com?subject=Hiring%20enquiry">Hire Me</a>
+    </nav>
+  </div>
+  <div class="rail">
+    <a href="https://www.linkedin.com/in/siphiwo-sizonqoba-manana-8a19591ab/" rel="me">LinkedIn</a>
+    <a href="mailto:sizomanana12@gmail.com">Email</a>
+    <span class="yr">Johannesburg, ZA</span>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero">
+  <div class="narrow wide">
+    <p class="barhead" style="display:inline-block">Interface and systems</p>
+    <h1>The craft that does not fit neatly into a case study</h1>
+    <p class="lede">Case studies are organised by client, which means the interface work gets
+    scattered across seven of them, a component decision here, a set of states there. This page
+    collects it in one place. Same projects, looked at as design rather than as outcomes.</p>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="narrow wide">
+    <h2>Designing inside a component library you cannot override</h2>
+    <p>HubSpot UI extensions permit no custom CSS. You build from the platform's own components at
+    the sizes they come in. That sounds like a limitation and mostly it is a discipline: every
+    decision has to be justified against something measurable rather than settled by taste.</p>
+    <p>The <code>Input</code>, <code>Select</code> and <code>DateInput</code> components are 240
+    pixels wide across all 488 variants. Three editable columns at native size need 720 of the 774
+    pixels available in the card. So three inputs could not sit side by side, and editable cells
+    became compact fields that open the real control on click. The pattern is a consequence of a
+    measurement, not a style.</p>
+    <div class="fig-grid two">
+      <figure>
+  <img src="../assets/img/cambridge/click-to-edit.jpg" alt="A compact table cell with a full width native HubSpot control opened over the top of it" width="1060" height="931" loading="lazy" decoding="async">
+  <figcaption>The resolution. Compact cell holds the value, native control opens over it at its real width.</figcaption>
+</figure>
+      <figure>
+  <img src="../assets/img/cambridge/component-kit.jpg" alt="A canvas holding the live HubSpot component palette with real component instances" width="1120" height="2788" loading="lazy" decoding="async">
+  <figcaption>Designing against roughly 3,000 real component instances rather than redrawn copies, which is what made the pixel arguments possible at all.</figcaption>
+</figure>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow wide">
+    <h2>Systems, not screens</h2>
+    <p>A site handed over as a set of pages falls apart the first time somebody needs a page nobody
+    drew. The pieces that decide whether it holds are the unglamorous ones: a search system with
+    every state documented, a navigation pattern that survives a growing service list, results blocks
+    that work in both colour schemes.</p>
+    <figure>
+  <img src="../assets/img/evara-site/filter-system.jpg" alt="A large board documenting a filter and search system with its states and variants laid out together" width="1400" height="1350" loading="lazy" decoding="async">
+  <figcaption>The Evara filter and search system, documented as states and variants rather than as one happy path screen.</figcaption>
+</figure>
+    <div class="fig-grid two">
+      <figure>
+  <img src="../assets/img/evara-site/megamenu-light.jpg" alt="A mega menu open in light mode showing a structured service list" width="1400" height="954" loading="lazy" decoding="async">
+  <figcaption>Mega menu, light. Navigation for a consultancy with several service lines is an information architecture problem before it is a design one.</figcaption>
+</figure>
+      <figure>
+  <img src="../assets/img/evara-site/megamenu-dark.jpg" alt="The same mega menu open in dark mode" width="1400" height="962" loading="lazy" decoding="async">
+  <figcaption>The same structure in dark, with the contrast relationships rebuilt rather than inverted.</figcaption>
+</figure>
+    </div>
+    <div class="fig-grid two">
+      <figure>
+  <img src="../assets/img/evara-site/search-light.jpg" alt="A search results block in light mode" width="1400" height="513" loading="lazy" decoding="async">
+  <figcaption>Search results block, light.</figcaption>
+</figure>
+      <figure>
+  <img src="../assets/img/evara-site/search-dark.jpg" alt="A search results block in dark mode" width="1400" height="513" loading="lazy" decoding="async">
+  <figcaption>Search results block, dark.</figcaption>
+</figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="narrow wide">
+    <h2>Light and dark, designed as a pair</h2>
+    <p>Inverting a palette is not designing a dark mode. It breaks image treatments, kills contrast
+    on accent colours, and turns considered shadows into grey smears. Both modes here were drawn from
+    the start, which is why the photographic treatment and the accent both survive the switch.</p>
+    <div class="ba">
+  <figure class="before"><span class="tag">Before</span><img src="../assets/img/evara-site/hifi-light-crop.jpg" alt="The Evara homepage hero designed in light mode" width="1440" height="900" loading="lazy" decoding="async"><figcaption>Light.</figcaption></figure>
+  <figure class="after"><span class="tag">After</span><img src="../assets/img/evara-site/hifi-dark-crop.jpg" alt="The same hero designed in dark mode" width="1440" height="900" loading="lazy" decoding="async"><figcaption>Dark. Same layout, rebuilt relationships.</figcaption></figure>
+</div>
+    <p class="embed-note">This site does the same thing, for the same reason. It follows your system
+    setting, and all 21 colour pairs across both schemes were measured against WCAG AA rather than
+    eyeballed.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow wide">
+    <h2>The states are the design</h2>
+    <p>Most design work ships the happy path and leaves engineering to invent the error states. That
+    is backwards. The error states are where somebody decides whether to trust a tool, and a tool
+    nobody trusts does not get used regardless of how good the main flow looks.</p>
+    <div class="fig-grid two">
+      <figure>
+  <img src="../assets/img/cambridge/fail-erp.jpg" alt="One product block showing an ERP error while the others are unaffected" width="1060" height="809" loading="lazy" decoding="async">
+  <figcaption>Partial failure. One block errored, the rest carried on, and the interface says which.</figcaption>
+</figure>
+      <figure>
+  <img src="../assets/img/cambridge/fail-gate.jpg" alt="A blocking modal requiring re-simulation before conversion" width="1060" height="888" loading="lazy" decoding="async">
+  <figcaption>A deliberate blocking gate, catching a stock shortage before anything is written.</figcaption>
+</figure>
+    </div>
+    <div class="fig-grid two">
+      <figure>
+  <img src="../assets/img/cambridge/fail-rejected.jpg" alt="An order rejected by the ERP with a stock shortage message stating nothing was created" width="1060" height="940" loading="lazy" decoding="async">
+  <figcaption>Rejection, with the recovery routes and an explicit statement that nothing was created.</figcaption>
+</figure>
+      <figure>
+  <img src="../assets/img/cambridge/zero-bloat.jpg" alt="A reopened quote with calculated price columns deliberately empty" width="1060" height="696" loading="lazy" decoding="async">
+  <figcaption>An empty state that is a data model decision. The system does not store ERP costs, so a reopened quote has none until it is re-simulated.</figcaption>
+</figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="narrow wide">
+    <h2>Templates that survive the client</h2>
+    <p>The real test of a page design is what happens when a marketing team adds a page you never
+    drew. So the deliverable is a template with its rules, not a one off layout.</p>
+    <div class="fig-grid two">
+      <figure>
+  <div class="scroller">
+    <div class="bar" aria-hidden="true"><span></span><span></span><span></span><em>template / sectors / banking</em></div>
+    <div class="pane" tabindex="0" role="group" aria-label="template / sectors / banking, scrollable full page design">
+      <img src="../assets/img/ruleguard/banking-template.jpg" alt="A sector child page template shown in full" width="1100" height="4288" loading="lazy" decoding="async">
+    </div>
+  </div>
+  <figcaption>A sector child page template. One structure, then the client fills it.</figcaption>
+</figure>
+      <figure>
+  <div class="scroller">
+    <div class="bar" aria-hidden="true"><span></span><span></span><span></span><em>template / roles</em></div>
+    <div class="pane" tabindex="0" role="group" aria-label="template / roles, scrollable full page design">
+      <img src="../assets/img/employmate/va-page.jpg" alt="A role sub page template shown in full" width="1100" height="5867" loading="lazy" decoding="async">
+    </div>
+  </div>
+  <figcaption>A role sub page template, repeated per role.</figcaption>
+</figure>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow wide">
+    <h2>Mobile designed, not reflowed</h2>
+    <p>A desktop layout squeezed into 390 pixels is a compromise everybody can feel. These were drawn
+    at mobile width, with their own hierarchy decisions.</p>
+    <div class="fig-grid two">
+      <figure class="phone">
+  <div class="reveal" data-reveal><img src="../assets/img/ruleguard/mobile-home.jpg" alt="A mobile homepage design for a compliance platform" width="360" height="12546" loading="lazy" decoding="async"></div>
+  <figcaption>Ruleguard home.</figcaption>
+</figure>
+      <figure class="phone">
+  <div class="reveal" data-reveal><img src="../assets/img/ruleguard/mobile-platforms.jpg" alt="A mobile platforms page design" width="360" height="10619" loading="lazy" decoding="async"></div>
+  <figcaption>Ruleguard platforms.</figcaption>
+</figure>
+    </div>
+    <div class="fig-grid two">
+      <figure class="phone">
+  <div class="reveal" data-reveal><img src="../assets/img/employmate/mobile-home.jpg" alt="A mobile homepage design for a recruitment service" width="375" height="7859" loading="lazy" decoding="async"></div>
+  <figcaption>Employmate home.</figcaption>
+</figure>
+      <figure class="phone">
+  <div class="reveal" data-reveal><img src="../assets/img/dayshape/demo-mobile.jpg" alt="A mobile book a demo page design" width="375" height="4865" loading="lazy" decoding="async"></div>
+  <figcaption>Dayshape book a demo.</figcaption>
+</figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="narrow wide">
+    <h2>Accessibility as a design constraint, not a checklist</h2>
+    <p>Contrast is the one accessibility requirement that is also a visual decision, which is why it
+    is worth deciding rather than checking afterwards. On this site the accent had to change
+    behaviour between schemes: the reference I designed from uses dark type on a light accent, but
+    emerald is a dark hue, so near black on emerald measures 2.99 to 1 and fails, while white on
+    emerald measures 6.25 to 1.</p>
+    <p>That is not a compliance detail, it is the reason the buttons look the way they do. The same
+    logic drove a second token for accents sitting on dark surfaces, because the light mode emerald on
+    the dark sidebar measured 2.93 to 1.</p>
+    <div class="callout">
+  <p class="callout-title">What that looks like in practice</p>
+  <p>Visible focus rings on every interactive element, a skip link, strictly hierarchical headings, real alt text describing what each image shows, reduced motion respected, zoom never disabled, and every image carrying its own dimensions so nothing shifts while the page loads. All of it is validated on every build rather than checked once.</p>
+</div>
+    <div class="cta-row">
+      <a class="btn" href="../index.html#work">See the Case Studies</a>
+      <a class="btn ghost" href="../about.html">About Me</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h2>This page has one conversion goal</h2>
+        <p>It is me. Open to CRO, UX and product design roles, remote, on UK or EU hours,
+        permanent.</p>
+        <p><a href="mailto:sizomanana12@gmail.com">sizomanana12@gmail.com</a></p>
+        <p><a href="https://www.linkedin.com/in/siphiwo-sizonqoba-manana-8a19591ab/" rel="me">LinkedIn</a></p>
+        <p style="margin-top:1.1rem"><a class="btn" href="mailto:sizomanana12@gmail.com?subject=Hiring%20enquiry">Hire Me</a></p>
+      </div>
+      <div>
+        <span class="k">Where</span>
+        <p>Johannesburg, South Africa</p>
+        <p>Available immediately</p>
+      </div>
+      <div>
+        <span class="k">Elsewhere</span>
+        <p><a href="../Sizo-Manana-CV.pdf">Download the CV</a></p>
+        <p><a href="../index.html#work">All work</a></p>
+        <p><a href="../about.html">About me</a></p>
+        <p><a href="../design-system.html">Design system</a></p>
+      </div>
+    </div>
+    <p class="legal">Client work shown with permission. Where a figure appears it comes from
+    analytics or reporting I produced or instrumented, and the case study states what it does and does
+    not prove. No estimated, rounded or illustrative numbers appear anywhere on this site. Built as
+    static HTML and CSS with no web fonts, no analytics and no cookies.</p>
+  </div>
+</footer>
+<script>
+(function(){
+  function init(){
+    document.querySelectorAll('[data-reveal]').forEach(function(el){
+      if(el.scrollHeight <= 760) return;
+      el.classList.add('is-clipped');
+      var b=document.createElement('button');
+      b.type='button'; b.className='reveal-btn'; b.setAttribute('aria-expanded','false');
+      b.textContent='Show the Full Page';
+      b.addEventListener('click',function(){
+        var open=!el.classList.toggle('is-clipped');
+        b.setAttribute('aria-expanded',String(open));
+        b.textContent=open?'Show Less':'Show the Full Page';
+        if(!open){b.scrollIntoView({block:'nearest'});}
+      });
+      el.insertAdjacentElement('afterend',b);
+    });
+  }
+  function raf(fn){var q=false;return function(){if(!q){q=true;requestAnimationFrame(function(){fn();q=false;});}};}
+  function progress(){
+    var bar=document.querySelector('.progress i'); if(!bar) return;
+    var tick=function(){
+      var h=document.documentElement.scrollHeight-window.innerHeight;
+      bar.style.transform='scaleX('+(h>0?Math.min(1,window.scrollY/h):0)+')';
+    };
+    var on=raf(tick);
+    addEventListener('scroll',on,{passive:true}); addEventListener('resize',on,{passive:true}); tick();
+  }
+  function timeline(){
+    var tl=document.querySelector('.timeline'); if(!tl) return;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var nodes=[].slice.call(tl.querySelectorAll('li'));
+    var tick=function(){
+      var r=tl.getBoundingClientRect(), mid=window.innerHeight*0.58;
+      tl.style.setProperty('--fill', Math.max(0,Math.min(r.height, mid-r.top))+'px');
+      nodes.forEach(function(n){
+        var t=n.getBoundingClientRect().top;
+        if(t<mid){n.classList.add('on');}else{n.classList.remove('on');}
+      });
+    };
+    var on=raf(tick);
+    addEventListener('scroll',on,{passive:true}); addEventListener('resize',on,{passive:true}); tick();
+  }
+  function jumpnav(){
+    var jn=document.querySelector('.jumpnav');
+    if(!jn||!('IntersectionObserver' in window)) return;
+    var links=[].slice.call(jn.querySelectorAll('a')), map={};
+    links.forEach(function(a){
+      var id=a.getAttribute('href').slice(1), t=document.getElementById(id);
+      if(t){map[id]=a;}
+    });
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!e.isIntersecting) return;
+        links.forEach(function(a){a.classList.remove('on');});
+        if(map[e.target.id]){map[e.target.id].classList.add('on');}
+      });
+    },{rootMargin:'-18% 0px -70% 0px'});
+    Object.keys(map).forEach(function(id){io.observe(document.getElementById(id));});
+  }
+  function boot(){init();progress();timeline();jumpnav();}
+  if(document.readyState!=='loading'){boot();}else{document.addEventListener('DOMContentLoaded',boot);}
+})();
+</script>
+</body>
+</html>
